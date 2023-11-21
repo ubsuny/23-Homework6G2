@@ -51,3 +51,12 @@ def f(x):
     x_safe = np.where(x == 0, np.finfo(float).eps, x)
 
     return np.exp(-1 / x_safe)
+
+def g(x):
+    # Replace zero values in x with a small positive value to avoid division by zero
+    x_safe = np.where(x == 0, np.finfo(float).eps, x)
+
+    return np.cos(1 / x_safe)
+
+def h(x):
+  return (x*x*x)+(1/2)
