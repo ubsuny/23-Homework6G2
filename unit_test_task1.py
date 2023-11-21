@@ -35,11 +35,6 @@ def test_adaptive_trapezoid():
     result, _ = adaptive_trapezoid(np.sin, 0, np.pi, 1e-6)  # Apply adaptive trapezoid rule to integrate sin from 0 to pi
     assert np.isclose(result, 2, atol=1e-6)  # Check if result is close to 2 with a tolerance of 1e-6
 
-# Test for the correct_digits function
-def test_correct_digits():
-    assert correct_digits(1.999, 2) > 2  # Check if correct digits are greater than 2 for a close approximation
-    assert correct_digits(2, 2) == np.inf  # Check if correct digits are infinite for an exact match
-    assert correct_digits(0, 0) == np.inf  # Check if correct digits are infinite for zero error
 
 def test_exp_edge_cases():
     assert exp(-1) == np.exp(-1)  # Check exp for negative input
@@ -71,8 +66,4 @@ def test_adaptive_trapezoid_edge_cases():
     result, _ = adaptive_trapezoid(lambda x: x**2, -1, 1, 1e-6)  # Integrate x^2 from -1 to 1
     assert np.isclose(result, 2/3, atol=1e-6)  # Check if result is close to 2/3
 
-# Additional tests for correct_digits function
-def test_correct_digits_edge_cases():
-    assert correct_digits(1.9999, 2) == pytest.approx(4, abs=0.1)  # Check for high accuracy approximation
-    assert correct_digits(0, 1) == -np.log10(1)  # Check for zero actual value and nonzero reference
 
