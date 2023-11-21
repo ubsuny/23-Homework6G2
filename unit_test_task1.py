@@ -3,8 +3,11 @@ import numpy as np
 from calculus_trithbha_version import simpson, trapezoid, adaptive_trapezoid  
 # Function to calculate exp(-1/x) with handling for x near 0
 def exp(x):
+    if np.isinf(x):
+        return 0
     safe_x = np.clip(x, 1e-10, np.inf)
     return np.where(x != 0, np.exp(-1/safe_x), 0)
+
 
 # Function to calculate cos(1/x) with handling for x near 0
 def cos(x):
@@ -31,7 +34,7 @@ def test_cos():
 def test_cubic():
     assert cubic(1, 0.5) == 1.5
     assert cubic(0) == 0.5
-    assert cubic(-1, -0.5) == -0.5
+    assert cubic(-1, -0.5) == -1.5
 
 # Test for the simpson function
 def test_simpson():
