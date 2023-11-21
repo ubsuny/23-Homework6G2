@@ -1,115 +1,60 @@
 import sys
 import numpy as np
 
-def simpson(f, a, b, n):
-    """
-    Approximate the definite integral of a function using Simpson's rule.
-    
-    Parameters:
-    f : callable
-        The function to integrate.
-    a : float
-        The lower limit of integration.
-    b : float
-        The upper limit of integration.
-    n : int
-        The number of subintervals to use (must be even).
-        
-    Returns:
-    float
-        The approximate integral of the function.
-    """
-    # Calculate the width of each subinterval
-    h = (b - a) / n
-    # Generate an array of indices to aid in summing terms
-    i = np.arange(0, n)
-    
-    # The first and last terms in Simpson's rule
-    s = f(a) + f(b) 
-    # Sum of terms multiplied by 4, for odd indices
-    s += 4 * np.sum(f(a + i[1::2] * h))
-    # Sum of terms multiplied by 2, for even indices (excluding first and last)
-    s += 2 * np.sum(f(a + i[2:-1:2] * h))
-    
-    # Multiply by the width of subintervals and divide by 3 to get final result
-    return s * h / 3
+# Modified Simpson's Rule with iteration tracking
+def simpson(f, a, b, n, accuracy):
+    def compute_simpson_integral(n):
+        h = (b - a) / n
+        i = np.arange(0, n)
+        s = f(a) + f(b) + 4 * np.sum(f(a + i[1::2] * h)) + 2 * np.sum(f(a + i[2:-1:2] * h))
+        return s * h / 3
 
-def trapezoid(f, a, b, n):
-    """
-    Approximate the definite integral of a function using the trapezoidal rule.
-    
-    Parameters:
-    f : callable
-        The function to integrate.
-    a : float
-        The lower limit of integration.
-    b : float
-        The upper limit of integration.
-    n : int
-        The number of subintervals to use.
-        
-    Returns:
-    float
-        The approximate integral of the function.
-    """
-    # Calculate the width of each subinterval
-    h = (b - a) / n
-    # The first and last terms in the trapezoidal rule
-    s = f(a) + f(b)
-    # Generate an array of indices to aid in summing terms
-    i = np.arange(0, n)
-    # Sum of the terms in the middle, multiplied by 2
-    s += 2 * np.sum(f(a + i[1:] * h))
-    # Multiply by half of the width of subintervals to get final result
-    return s * h / 2
+    old_integral = compute_simpson_integral(n)
+    iterations = 1
+    while True:
+        n *= 2
+        new_integral = compute_simpson_integral(n)
+        if np.abs(new_integral - old_integral) < accuracy:
+            return new_integral, iterations
+        old_integral = new_integral
+        iterations += 1
 
-def adaptive_trapezoid(f, a, b, acc, output=False):
-    """
-    Compute the definite integral of a function using the adaptive trapezoidal method
-    to a desired accuracy.
-    
-    Parameters:
-    f : callable
-        The function to integrate.
-    a : float
-        The lower limit of integration.
-    b : float
-        The upper limit of integration.
-    acc : float
-        The desired accuracy of the result.
-    output : bool, optional
-        If True, print intermediate values (default is False).
-        
-    Returns:
-    float
-        The approximate integral of the function.
-    """
-    # Initialize the sum with an infinitely large value for comparison
+# Modified Trapezoidal Rule with iteration tracking
+def trapezoid(f, a, b, n, accuracy):
+    def compute_trapezoid_integral(n):
+        h = (b - a) / n
+        s = f(a) + f(b) + 2 * np.sum(f(a + np.arange(1, n) * h))
+        return s * h / 2
+
+    old_integral = compute_trapezoid_integral(n)
+    iterations = 1
+    while True:
+        n *= 2
+        new_integral = compute_trapezoid_integral(n)
+        if np.abs(new_integral - old_integral) < accuracy:
+            return new_integral, iterations
+        old_integral = new_integral
+        iterations += 1
+
+# Existing adaptive_trapezoid function from your code
+# Adaptive Trapezoidal Rule with iteration tracking
+def adaptive_trapezoid(f, a, b, accuracy):
     old_s = np.inf
-    # Initial width of the interval
     h = b - a
-    # Start with 1 subinterval
     n = 1
-    # Initial approximation of the integral
     s = (f(a) + f(b)) * 0.5
-    # Print the initial approximation if output is requested
-    if output: 
-        print("N = " + str(n+1) + ",  Integral = " + str(h * s))
-    # Loop until the desired accuracy is achieved
-    while abs(h * (old_s - s * 0.5)) > acc:
-        # Store the current sum for comparison in the next iteration
+    iterations = 0  # Initialize iteration counter
+
+    while abs(h * (old_s - s * 0.5)) > accuracy:
+        iterations += 1  # Increment the iteration counter
         old_s = s
-        # Double the number of intervals and halve the interval width
         for i in np.arange(n):
-            # Increment the sum with the middle points of the current intervals
             s += f(a + (i + 0.5) * h)
         n *= 2
         h *= 0.5
-        # Print the updated approximation if output is requested
-        if output:
-            print("N = " + str(n) + ",  Integral = " + str(h * s))
-    # Return the final approximation of the integral
-    return h * s
+
+    return h * s, iterations  # Return the integral and the number of iterations
+
 
 # root finding
 def root_print_header(algorithm, accuracy):
