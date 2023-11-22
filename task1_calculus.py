@@ -2,9 +2,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def simpson(f, a, b, n):
-    """Approximates the definite integral of f from a to b by
-    the composite Simpson's rule, using n subintervals.
-    From http://en.wikipedia.org/wiki/Simpson's_rule
+     """
+    Approximate the definite integral of a function using Simpson's rule.
+    
+    Parameters:
+    f : callable
+        The function to integrate.
+    a : float
+        The lower limit of integration.
+    b : float
+        The upper limit of integration.
+    n : int
+        The number of subintervals to use (must be even).
+        
+    Returns:
+    float
+        The approximate integral of the function.
     """
 
     if n % 2 != 0:
