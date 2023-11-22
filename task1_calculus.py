@@ -5,6 +5,7 @@ def simpson(f, a, b, n):
     """Approximates the definite integral of f from a to b by
     the composite Simpson's rule, using n subintervals.
     From http://en.wikipedia.org/wiki/Simpson's_rule
+    ok
     """
 
     if n % 2 != 0:
