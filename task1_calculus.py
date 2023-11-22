@@ -109,8 +109,24 @@ def cumulative_integral_trapezoid(f,a,b,dx):
 
 def adaptive_trapezoid(f, a, b, acc, output=False):
     """
-    Uses the adaptive trapezoidal method to compute the definite integral
-    of f from a to b to desired accuracy acc.
+    Compute the definite integral of a function using the adaptive trapezoidal method
+    to a desired accuracy.
+    
+    Parameters:
+    f : callable
+        The function to integrate.
+    a : float
+        The lower limit of integration.
+    b : float
+        The upper limit of integration.
+    acc : float
+        The desired accuracy of the result.
+    output : bool, optional
+        If True, print intermediate values (default is False).
+        
+    Returns:
+    float
+        The approximate integral of the function.
     """
     old_s = np.inf
     h = b - a
