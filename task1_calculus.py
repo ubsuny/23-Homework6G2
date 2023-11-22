@@ -61,9 +61,22 @@ def cumulative_integral_simpson(f,a,b,dx):
 
 
 def trapezoid(f, a, b, n):
-    """Approximates the definite integral of f from a to b by
-    the composite trapezoidal rule, using n subintervals.
-    From http://en.wikipedia.org/wiki/Trapezoidal_rule
+    """
+    Approximate the definite integral of a function using the trapezoidal rule.
+    
+    Parameters:
+    f : callable
+        The function to integrate.
+    a : float
+        The lower limit of integration.
+    b : float
+        The upper limit of integration.
+    n : int
+        The number of subintervals to use.
+        
+    Returns:
+    float
+        The approximate integral of the function.
     """
     h = (b - a) / n
     s = f(a) + f(b)
