@@ -115,7 +115,7 @@ def calculate_accuracy(known_root, obtained_root, tolerance):
         return 0
 
 # Bisection and Newton-Raphson methods with iteration tracking
-def bisection_method_mod(func, a, b, tol=1e-6, max_iter=100):
+def bisection_method(func, a, b, tol=1e-6, max_iter=100):
     """
     Bisection method to find the root of a function.
     This method returns the root and the number of iterations taken.
@@ -138,7 +138,7 @@ def bisection_method_mod(func, a, b, tol=1e-6, max_iter=100):
 
     return (a_n + b_n) / 2, max_iter  # Return the best estimate after max_iter
 
-def newton_raphson_method_mod(func, d_func, x0, tol=1e-6, max_iter=100):
+def newton_raphson_method(func, d_func, x0, tol=1e-6, max_iter=100):
     """
     Newton-Raphson method to find the root of a function.
     This method returns the root and the number of iterations taken.
