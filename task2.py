@@ -12,6 +12,16 @@ def f_tan(x):
     return tan(x)
 
 def df_tan(x):
+"""
+    The derivative of the function tan(x).
+
+    Parameters:
+    - x: float
+        The variable.
+
+    Returns:
+    float: The derivative value at x.
+    """
     return 1 / cos(x)**2
 
 def f_tanh(x):
