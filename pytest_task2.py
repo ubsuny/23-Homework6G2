@@ -5,7 +5,7 @@ a function to calculate the accuracy of the roots found.
 """
 
 import numpy as np
-from calculus_trithbha_version import bisection_method, newton_raphson_method, calculate_accuracy
+from task3_calculus import bisection_method, newton_raphson_method, calculate_accuracy
 
 def tan_func(x):
     """
