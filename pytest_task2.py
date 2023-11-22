@@ -62,3 +62,39 @@ def test_calculate_accuracy():
     obtained_root = np.pi/2
     accuracy = calculate_accuracy(known_root, obtained_root, 1e-6)
     assert accuracy == float('inf')
+
+def test_bisection_method_no_root():
+    """
+    Test the bisection method on a function with no root in the given interval.
+    The function tested is cos(x) in the interval [0, π/2], which does not contain a root.
+    The method should return None.
+    """
+    root, _ = bisection_method(cos_func, 0, np.pi/2)
+    assert root is None
+
+def test_newton_raphson_method_multiple_roots():
+    """
+    Test the Newton-Raphson method on a function with multiple roots.
+    The function tested is sin(x) with an initial guess close to π, ensuring it finds the root at π.
+    """
+    root, _ = newton_raphson_method(sin_func, d_sin_func, 3)
+    assert np.isclose(root, np.pi, atol=1e-6)
+
+def test_edge_case_bisection_method():
+    """
+    Test the bisection method on an edge case.
+    The function tested is tan(x) in an interval close to its vertical asymptote (π/2).
+    """
+    root, _ = bisection_method(tan_func, np.pi/2 - 0.1, np.pi/2 + 0.1)
+    assert root is not None
+
+def test_calculate_accuracy_non_perfect_match():
+    """
+    Test the calculate_accuracy function with a known root and an obtained root that do not match perfectly.
+    Tests with a small deviation to check the accuracy calculation.
+    """
+    known_root = np.pi/2
+    obtained_root = np.pi/2 + 1e-4
+    accuracy = calculate_accuracy(known_root, obtained_root, 1e-6)
+    assert accuracy > 0 and accuracy < float('inf')
+
