@@ -30,7 +30,7 @@ def test_newton_raphson_method_tan():
     Checks if the method correctly finds the root of tan(x) using an initial guess
     in the interval [π/4, 3π/4], where the known root is π/2.
     """
-    root, _ = newton_raphson_method_mod(tan_func, d_tan_func, (np.pi/4 + 3*np.pi/4) / 2)
+    root, _ = newton_raphson_method(tan_func, d_tan_func, (np.pi/4 + 3*np.pi/4) / 2)
     assert np.isclose(root, np.pi/2, atol=1e-6)
 
 def test_bisection_method_tanh():
@@ -39,7 +39,7 @@ def test_bisection_method_tanh():
     Checks if the method correctly finds the root of tanh(x) in the interval [-2, 2],
     where the known root is 0.
     """
-    root, _ = bisection_method_mod(tanh_func, -2, 2)
+    root, _ = bisection_method(tanh_func, -2, 2)
     assert np.isclose(root, 0, atol=1e-6)
 
 def test_newton_raphson_method_tanh():
@@ -48,7 +48,7 @@ def test_newton_raphson_method_tanh():
     Checks if the method correctly finds the root of tanh(x) using an initial guess of 0.2,
     where the known root is 0.
     """
-    root, _ = newton_raphson_method_mod(tanh_func, d_tanh_func, 0.2)
+    root, _ = newton_raphson_method(tanh_func, d_tanh_func, 0.2)
     assert np.isclose(root, 0, atol=1e-6)
 
 def test_calculate_accuracy():
