@@ -1,4 +1,4 @@
-name: Unit testing with pytest
+name: Pytest for Task2
 
 on: [push] # when should we run this action
 
@@ -18,4 +18,4 @@ jobs: # what should we do when it is run
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest tests.py
+        pytest pytest_task2.py
