@@ -73,3 +73,8 @@ For the simple `cubic_function`, all methods converge quickly, indicating their 
 ## Conclusion
 The comparison reveals that custom integration methods perform comparably to NumPy's functions in terms of accuracy. The custom methods are particularly effective for the polynomial function. However, for functions with more complex behaviors, like `exp_function` and `cos_function`, slight differences are observed, likely due to the nuances in how numerical approximations are handled. Efficiency-wise, the custom adaptive method, while slightly more iterative, provides a good balance between accuracy and computational cost, particularly for complex integrations.
 
+## References 
+- https://github.com/ubsuny/CompPhys/tree/main/Calculus
+- Atkinson, Kendall E. (1989). An Introduction to Numerical Analysis (2nd ed.).   John Wiley & Sons. ISBN 0-471-50023-2.
+- Burden & Faires 1985, p. 29.
+- Süli, Endre; Mayers, David (2003). An Introduction to Numerical Analysis.       Cambridge University Press. ISBN 0-521-00794-1.
