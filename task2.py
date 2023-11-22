@@ -21,6 +21,23 @@ def df_tanh(x):
     return 1 - tanh(x)**2
 
 def bisection_method(f, a, b, tol=1e-10):
+"""
+    Find the root of a function using the Bisection method.
+
+    Parameters:
+    - f: function
+        The function for which roots are to be found.
+    - a: float
+        The lower bound of the interval.
+    - b: float
+        The upper bound of the interval.
+    - tol: float, optional
+        Tolerance for stopping criterion.
+
+    Returns:
+    tuple: (root, steps)
+        The root of the function and the number of steps taken.
+    """
     if f(a) * f(b) >= 0:
         raise ValueError("Function must have different signs at the endpoints.")
     
