@@ -1,30 +1,106 @@
-import pytest
+"""
+This module contains definitions and tests for various mathematical functions and methods.
+It includes tests for bisection and Newton-Raphson root-finding methods, as well as
+a function to calculate the accuracy of the roots found.
+"""
+
 import numpy as np
 from calculus_trithbha_version import bisection_method, newton_raphson_method, calculate_accuracy
 
-# Function definitions and their derivatives
 def tan_func(x):
+    """
+    Compute the tangent of x.
+    
+    Parameters:
+    - x: The value to compute the tangent for.
+    
+    Returns:
+    - The tangent of x.
+    """
     return np.tan(x)
 
 def tanh_func(x):
+    """
+    Compute the hyperbolic tangent of x.
+    
+    Parameters:
+    - x: The value to compute the hyperbolic tangent for.
+    
+    Returns:
+    - The hyperbolic tangent of x.
+    """
     return np.tanh(x)
 
 def d_tan_func(x):
+    """
+    Compute the derivative of the tangent function.
+    
+    Parameters:
+    - x: The value to compute the derivative for.
+    
+    Returns:
+    - The derivative of the tangent of x.
+    """
     return 1 / np.cos(x)**2
 
 def d_tanh_func(x):
+    """
+    Compute the derivative of the hyperbolic tangent function.
+    
+    Parameters:
+    - x: The value to compute the derivative for.
+    
+    Returns:
+    - The derivative of the hyperbolic tangent of x.
+    """
     return 1 - np.tanh(x)**2
     
 def sin_func(x):
+    """
+    Compute the sine of x.
+    
+    Parameters:
+    - x: The value to compute the sine for.
+    
+    Returns:
+    - The sine of x.
+    """
     return np.sin(x)
 
 def cos_func(x):
+    """
+    Compute the cosine of x.
+    
+    Parameters:
+    - x: The value to compute the cosine for.
+    
+    Returns:
+    - The cosine of x.
+    """
     return np.cos(x)
 
 def d_sin_func(x):
+    """
+    Compute the derivative of the sine function.
+    
+    Parameters:
+    - x: The value to compute the derivative for.
+    
+    Returns:
+    - The derivative of the sine of x.
+    """
     return np.cos(x)
 
 def d_cos_func(x):
+    """
+    Compute the derivative of the cosine function.
+    
+    Parameters:
+    - x: The value to compute the derivative for.
+    
+    Returns:
+    - The derivative of the cosine of x.
+    """
     return -np.sin(x)
 
 def test_bisection_method_tan():
