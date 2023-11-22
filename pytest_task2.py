@@ -14,6 +14,18 @@ def d_tan_func(x):
 
 def d_tanh_func(x):
     return 1 - np.tanh(x)**2
+    
+def sin_func(x):
+    return np.sin(x)
+
+def cos_func(x):
+    return np.cos(x)
+
+def d_sin_func(x):
+    return np.cos(x)
+
+def d_cos_func(x):
+    return -np.sin(x)
 
 def test_bisection_method_tan():
     """
