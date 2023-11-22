@@ -94,9 +94,9 @@ def test_adaptive_trapezoid():
     assert np.isclose(result, 2, atol=1e-6)
 
 def test_exp_with_function():
-     """
-     Unit test for the exp function using a square function as input.
-     """
+    """
+    Unit test for the exp function using a square function as input.
+    """
     # Define a test function (lambda function) that squares its input
     test_function = lambda x: x**2
 
@@ -126,4 +126,3 @@ def test_cubic_with_function():
     # The expected result is the cube of the test function's output at 1 plus a constant (0.5).
     # Since test_function(1) is 5, cubic(5) should equal 5^3 + 0.5.
     assert cubic(test_function(1)) == test_function(1)**3 + 0.5
-
