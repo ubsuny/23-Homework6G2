@@ -21,7 +21,7 @@ def test_bisection_method_tan():
     Checks if the method correctly finds the root of tan(x) in the interval [π/4, 3π/4],
     where the known root is π/2.
     """
-    root, _ = bisection_method_mod(tan_func, np.pi/4, 3*np.pi/4)
+    root, _ = bisection_method(tan_func, np.pi/4, 3*np.pi/4)
     assert np.isclose(root, np.pi/2, atol=1e-6)
 
 def test_newton_raphson_method_tan():
