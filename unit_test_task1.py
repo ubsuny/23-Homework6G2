@@ -95,8 +95,8 @@ def test_adaptive_trapezoid():
 
 def test_exp_with_function():
      """
-    Unit test for the exp function using a square function as input.
-    """
+     Unit test for the exp function using a square function as input.
+     """
     # Define a test function (lambda function) that squares its input
     test_function = lambda x: x**2
 
