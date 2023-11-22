@@ -33,7 +33,7 @@ jobs:
 
     # Run pylint on the Python script and save the output to a log file
     - name: Run pylint
-      run: pylint integration.py || exit 0
+      run: pylint task1_calculus.py || exit 0
 
     # Note: '|| exit 0' is used to ensure the workflow doesn't fail even if pylint finds issues.
       # Check the log for linting results without the action failing.
