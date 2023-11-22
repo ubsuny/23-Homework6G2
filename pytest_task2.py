@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from calculus_trithbha_version import bisection_method_mod, newton_raphson_method_mod, calculate_accuracy
+from calculus_trithbha_version import bisection_method, newton_raphson_method, calculate_accuracy
 
 # Function definitions and their derivatives
 def tan_func(x):
