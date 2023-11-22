@@ -1,0 +1,41 @@
+# Name of the GitHub Action Workflow
+name: Pylint for integration_algorithm
+
+# This action will trigger on every push to the repository
+on: [push]
+
+# Define jobs to be executed
+jobs:
+  # Name of the job, in this case, 'lint'
+  lint:
+    # This job will run on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+
+    # Steps to follow for this job
+    steps:
+    # Checkout the code from the current repository
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Setup Python 3.8 for the action
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+
+    # Install the required Python packages
+    - name: Install dependencies
+      run: |
+        # Upgrade pip to the latest version
+        python -m pip install --upgrade pip
+        # Install necessary libraries for the Python code and pylint
+        pip install -r requirements.txt
+
+    # Run pylint on the Python script and save the output to a log file
+    - name: Run pylint
+      run: pylint integration.py || exit 0
+
+    # Note: '|| exit 0' is used to ensure the workflow doesn't fail even if pylint finds issues.
+      # Check the log for linting results without the action failing.
+
+   
