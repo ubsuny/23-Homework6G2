@@ -12,48 +12,31 @@ def simpson(f, a, b, n):
     the composite Simpson's rule, using n subintervals.
     From http://en.wikipedia.org/wiki/Simpson's_rule
     """
-
     if n % 2 != 0:
         raise ValueError("Number of subintervals (n) must be even.")
-
     h = (b - a) / n
-
     i = np.arange(0, n)
-
     s = f(a) + f(b)
     s += 4 * np.sum(f(a + i[1::2] * h))
     s += 2 * np.sum(f(a + i[2:-1:2] * h))
-
     i = np.arange(0,n)
-
     s = f(a) + f(b)
     s += 4 * np.sum( f( a + i[1::2] * h ) )
-    s += 2 * np.sum( f( a + i[2:-1:2] * h ) )
-
-
-
-
+    s += 2 * np.sum( f( a + i[2:-1:2] * h ) 
     return s * h / 3
-
-
-
+    
 def cumulative_integral_simpson(func, a, b, dx):
     """Function that calculates the antiderivative of func"""
-
     x_values = np.arange(a, b, dx)
     num_of_steps = np.floor((b - a) / dx)
-
     if num_of_steps < 2:
         raise ValueError("(b - a) / dx must be at least 2")
-
     antiderivative = np.empty(len(x_values) + 1)
     antiderivative[0] = simpson(func, a, a + dx, 4)
-
     j = 1
     while j <= num_of_steps:
         antiderivative[j] = antiderivative[j - 1] + simpson(func, a + ((j - 1) * dx), a + (j * dx), 4)
         j = j + 1
-
     return antiderivative[:-1], x_values
 
 def f(x):
@@ -71,7 +54,6 @@ def g(x):
 def h(x):
     """Function to calculate a cubic polynomial x^3 + 1/2."""
     return (x * x * x) + (1 / 2)
-
 
 def trapezoid(f, a, b, n):
     """
@@ -97,34 +79,22 @@ def trapezoid(f, a, b, n):
     s += 2 * np.sum( f(a + i[1:] * h) )
     return s * h / 2
 
-
 def cumulative_integral_trapezoid(f,a,b,dx):
     """Function that calculates the antidervative function of f"""
-
     x_values = np.arange(a,b,dx)
-
     num_of_steps = np.floor((b-a)/dx)
-
     antiderivative = np.empty(len(x_values)+1)
-
     antiderivative[0] = trapezoid(f, a, a+dx, 4)
-
     j = 1
-
     while j <= num_of_steps :
-
       antiderivative[j] = antiderivative[j-1] + trapezoid(f, a+((j-1)*dx), a+(j*dx), 4)
-
       j = j + 1
-
     return antiderivative[:-1], x_values
-
 
 def adaptive_trapezoid(f, a, b, acc, output=False):
     """
     Compute the definite integral of a function using the adaptive trapezoidal method
     to a desired accuracy.
-    
     Parameters:
     f : callable
         The function to integrate.
@@ -157,24 +127,14 @@ def adaptive_trapezoid(f, a, b, acc, output=False):
             print ("N = " + str(n) + ",  Integral = " + str( h*s ))
     return h * s
 
-
 def cumulative_integral_adaptive_trap(f,a,b,dx):
     """Function that calculates the antidervative function of f"""
-
     x_values = np.arange(a,b,dx)
-
     num_of_steps = np.floor((b-a)/dx)
-
     antiderivative = np.empty(len(x_values)+1)
-
     antiderivative[0] = adaptive_trapezoid(f, a, a+dx, 10)
-
     j = 1
-
     while j <= num_of_steps :
-
       antiderivative[j] = antiderivative[j-1] + adaptive_trapezoid(f, a+((j-1)*dx), a+(j*dx), 10)
-
       j = j + 1
-
     return antiderivative[:-1], x_values
