@@ -1,4 +1,4 @@
-name: Unit testing with pytest
+name: Pytest for Task1
 
 on: [push] # when should we run this action
 
