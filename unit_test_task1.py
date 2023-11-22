@@ -1,58 +1,102 @@
-import pytest
+"""
+This module contains unit tests for the calculus_trithbha_version functions, including
+tests for exponential, cosine, and cubic calculations, as well as the Simpson and trapezoid
+integration methods.
+"""
+
 import numpy as np
 from calculus_trithbha_version import simpson, trapezoid, adaptive_trapezoid  
-# Function to calculate exp(-1/x) with handling for x near 0
+
 def exp(x):
+    """
+    Calculate the exponential function exp(-1/x), with special handling for x approaching zero.
+    
+    Parameters:
+    - x: The value (or array of values) to evaluate exp(-1/x) at.
+    
+    Returns:
+    - The value of exp(-1/x) or 0 if x is infinite.
+    """
     if np.isinf(x):
         return 0
     safe_x = np.clip(x, 1e-10, np.inf)
     return np.where(x != 0, np.exp(-1/safe_x), 0)
 
-
-# Function to calculate cos(1/x) with handling for x near 0
 def cos(x):
+    """
+    Calculate the cosine function cos(1/x), with special handling for x approaching zero.
+    
+    Parameters:
+    - x: The value (or array of values) to evaluate cos(1/x) at.
+    
+    Returns:
+    - The value of cos(1/x) or 1 if x is zero.
+    """
     safe_x = np.clip(x, 1e-10, np.inf)
     return np.where(x != 0, np.cos(1/safe_x), 1)
 
-# Cubic function for testing: x^3 + constant
 def cubic(x, constant=1/2):
+    """
+    Evaluate a cubic function x^3 with an added constant.
+    
+    Parameters:
+    - x: The value to evaluate the cubic function at.
+    - constant: The constant to add to the result (default 0.5).
+    
+    Returns:
+    - The value of x^3 plus the constant.
+    """
     return x**3 + constant
 
-# Test for the exp function
 def test_exp():
+    """
+    Unit tests for the exp function.
+    """
     assert exp(0) == 0
     assert exp(1) == np.exp(-1)
     assert np.isclose(exp(np.inf), 0)
 
-# Test for the cos function
 def test_cos():
+    """
+    Unit tests for the cos function.
+    """
     assert cos(0) == 1
     assert np.isclose(cos(1), np.cos(1))
     assert np.isclose(cos(np.inf), np.cos(0))
 
-# Test for the cubic function
 def test_cubic():
+    """
+    Unit tests for the cubic function.
+    """
     assert cubic(1, 0.5) == 1.5
     assert cubic(0) == 0.5
     assert cubic(-1, -0.5) == -1.5
 
-# Test for the simpson function
 def test_simpson():
+    """
+    Unit test for the Simpson integration method.
+    """
     result, _ = simpson(np.sin, 0, np.pi, 100, 1e-6)
     assert np.isclose(result, 2, atol=1e-6)
 
-# Test for the trapezoid function
 def test_trapezoid():
+    """
+    Unit test for the trapezoid integration method.
+    """
     result, _ = trapezoid(np.sin, 0, np.pi, 100, 1e-6)
     assert np.isclose(result, 2, atol=1e-6)
 
-# Test for the adaptive_trapezoid function
 def test_adaptive_trapezoid():
+    """
+    Unit test for the adaptive trapezoid integration method.
+    """
     result, _ = adaptive_trapezoid(np.sin, 0, np.pi, 1e-6)
     assert np.isclose(result, 2, atol=1e-6)
 
-# Test for the 'exp' function with a different function as input
 def test_exp_with_function():
+     """
+    Unit test for the exp function using a square function as input.
+    """
     # Define a test function (lambda function) that squares its input
     test_function = lambda x: x**2
 
@@ -66,8 +110,10 @@ def test_exp_with_function():
     # which is the expected behavior for input 1 to the 'exp' function.
     assert np.isclose(exp(test_function(1)), np.exp(-1))
 
-# Test for the 'cubic' function with a different function as input
 def test_cubic_with_function():
+    """
+    Unit test for the cubic function using a linear function as input.
+    """
     # Define a linear test function (lambda function) that represents a simple linear relationship
     test_function = lambda x: 2*x + 3
 
