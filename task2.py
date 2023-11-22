@@ -4,17 +4,83 @@ from rootfinding import *
 from scipy.optimize import newton
 from math import tan, tanh, cos
 
-def calc_tan(x):
-    x=np.tan(y)
+# Bisection and Newton-Raphson methods.
+
+import numpy as np
+
+def tan_function(x):
+    """Function y(x) = tan(x)."""
+    return np.tan(x)
+
+def tanh_function(x):
+    """Function y(x) = tanh(x)."""
+    return np.tanh(x)
+
+def d_tan_function(x):
+    """Derivative of y(x) = tan(x)."""
+    return 1 / np.cos(x)**2
+
+def d_tanh_function(x):
+    """Derivative of y(x) = tanh(x)."""
+    return 1 - np.tanh(x)**2
+
+def bisection_method(f, a, b, tol=1e-5, max_iter=1000):
+    """Bisection root-finding method."""
+    if f(a) * f(b) >= 0:
+        print("Bisection method fails.")
+        return None, None
+    a_n, b_n = a, b
+    for n in range(1, max_iter + 1):
+        m_n = (a_n + b_n) / 2
+        f_m_n = f(m_n)
+        if abs(f_m_n) < tol:
+            return m_n, n  # root and number of iterations
+        elif f(a_n) * f_m_n < 0:
+            a_n, b_n = a_n, m_n
+        elif f(b_n) * f_m_n < 0:
+            a_n, b_n = m_n, b_n
+        else:
+            print("Bisection method fails.")
+            return None, None
+    print("Bisection method did not converge.")
+    return None, None
+
+def newton_raphson_method(f, df, x0, tol=1e-5, max_iter=1000):
+    """Newton-Raphson root-finding method."""
+    xn = x0
+    for n in range(0, max_iter):
+        fxn = f(xn)
+        if abs(fxn) < tol:
+            return xn, n  # root and number of iterations
+        dfxn = df(xn)
+        if dfxn == 0:
+            print("Zero derivative. No solution found.")
+            return None, None
+        xn = xn - fxn / dfxn
+    print("Newton-Raphson method did not converge.")
+    return None, None
+
+def test_algorithms():
+    """Test and compare the Bisection and Newton-Raphson methods."""
+    functions = [(tan_function, d_tan_function), (tanh_function, d_tanh_function)]
+    initial_guesses = [4.5, 0]  # initial guesses for Newton-Raphson
+    intervals = [(4, 5), (-1, 1)]  # intervals for Bisection
+
+    for i, (f, df) in enumerate(functions):
+        print(f"\nTesting on function {i+1}:")
+        
+        # Bisection Method
+        root_bisection, steps_bisection = bisection_method(f, *intervals[i])
+        print(f"Bisection Method: Root = {root_bisection}, Steps = {steps_bisection}")
+
+        # Newton-Raphson Method
+        root_newton, steps_newton = newton_raphson_method(f, df, initial_guesses[i])
+        print(f"Newton-Raphson Method: Root = {root_newton}, Steps = {steps_newton}")
+
+# Run the test
+test_algorithms()
 
 
-def f_tan(x):
-    return tan(x)
-
-def df_tan(x):
-
-
-    
 """
     The derivative of the function tan(x).
 
