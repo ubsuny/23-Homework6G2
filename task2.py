@@ -12,6 +12,7 @@ def f_tan(x):
     return tan(x)
 
 def df_tan(x):
+
     
 """
     The derivative of the function tan(x).
