@@ -5,7 +5,7 @@ integration methods.
 """
 
 import numpy as np
-from calculus_trithbha_version import simpson, trapezoid, adaptive_trapezoid  
+from task3_calculus import simpson, trapezoid, adaptive_trapezoid  
 
 def exp(x):
     """
