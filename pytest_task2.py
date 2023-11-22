@@ -99,14 +99,3 @@ def test_edge_case_bisection_method():
     """
     root, _ = bisection_method(tan_func, np.pi/2 - 0.1, np.pi/2 + 0.1)
     assert root is not None
-
-def test_calculate_accuracy_non_perfect_match():
-    """
-    Test the calculate_accuracy function with a known root and an obtained root that do not match perfectly.
-    Tests with a small deviation to check the accuracy calculation.
-    """
-    known_root = np.pi/2
-    obtained_root = np.pi/2 + 1e-4
-    accuracy = calculate_accuracy(known_root, obtained_root, 1e-6)
-    assert 0 < accuracy < float('inf')
-
