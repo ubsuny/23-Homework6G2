@@ -18,4 +18,4 @@ jobs: # what should we do when it is run
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest_task2.py
+        pytest pytest_task2.py
