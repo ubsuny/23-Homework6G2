@@ -56,7 +56,7 @@ For `cubic_function`, a straightforward polynomial, all methods except the NumPy
 
 The `exp_function` is well-handled with minimal iterations in both the Simpson and Trapezoidal methods. The adaptive trapezoidal method, however, required more iterations (7), which could suggest that its adaptive algorithm is more sensitive to achieving the accuracy threshold for this particular function.
 
-### Function: cos_function (Interval: [0, 2π])
+### Function: cos_function (Interval: (0, 2π])
 - **Simpson Iterations**: 2
 - **Trapezoid Iterations**: 5
 - **Adaptive Trapezoid Iterations**: 12
