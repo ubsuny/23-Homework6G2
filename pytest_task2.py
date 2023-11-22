@@ -108,5 +108,5 @@ def test_calculate_accuracy_non_perfect_match():
     known_root = np.pi/2
     obtained_root = np.pi/2 + 1e-4
     accuracy = calculate_accuracy(known_root, obtained_root, 1e-6)
-    assert accuracy > 0 and accuracy < float('inf')
+    assert 0 < accuracy < float('inf')
 
